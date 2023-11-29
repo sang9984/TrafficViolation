@@ -89,7 +89,7 @@ struct ViolationDataManager {
         }
     
     func insertNewCar(car: TrafficViolation, completion: @escaping (Bool) -> Void) {
-        let urlString = "http://172.20.10.2:443/TrafficViolations/insert_record\(apiKey)" // 실제 서버의 API 주소로 변경
+        let urlString = "http://172.20.10.2:443/TrafficViolations/insert_record/\(apiKey)" // 실제 서버의 API 주소로 변경
         let parameters: [String: Any] = [
             "car_number": car.carNumber,
             "overspeed": car.overSpeed,
@@ -147,7 +147,7 @@ struct ViolationDataManager {
                 "violation_date": car.violationDate,
                 "image_path": car.imagePath
             ]
-
+        
             AF.request(urlString, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
                 switch response.result {
                 case .success:

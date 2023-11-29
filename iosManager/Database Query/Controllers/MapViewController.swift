@@ -12,6 +12,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     // 변수선언
+    var detailView = DetailView()
     var mapView: MKMapView!
     var locationManager: CLLocationManager? = nil
     var violationData: [TrafficViolation] = []
@@ -30,9 +31,9 @@ class MapViewController: UIViewController {
             dataManager.delegate = self
             dataManager2.delegate = self
             mapView?.delegate = self
+            setupdroneTowerLocation()
             dataManager.fetchViolationData()
             dataManager2.fetchDroneTowerData()
-            
         }
     
     //MARK: - 기본 세팅
@@ -48,11 +49,12 @@ class MapViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        
     }
     
     // 버튼설정 - 해당 버늩을 클릭하면 내 현재 위치를 중심으로 화면이동
     func setupLocationButton() {
-        
         locationButton = UIButton(type: .system) // 변경된 부분
         locationButton.setTitle("내 위치로 이동", for: .normal)
         locationButton.addTarget(self, action: #selector(centerMapOnUserLocation), for: .touchUpInside)
@@ -113,35 +115,39 @@ class MapViewController: UIViewController {
     // 드론 타워의 위치 업데이트 처리
     func setupdroneTowerLocation(){
         
-        
         let hanseo = CLLocationCoordinate2D(latitude: 36.6854, longitude: 126.5793)
         let hanseoTower = MKPointAnnotation()
         hanseoTower.coordinate = hanseo
         hanseoTower.title = "충청남도 서산시 해미면 한서대 입구"
+        hanseoTower.subtitle = "한서대 입구"
         mapView.addAnnotation(hanseoTower)
         
         let haemie = CLLocationCoordinate2D(latitude:  36.7132, longitude: 126.5625)
         let haemieTower = MKPointAnnotation()
         haemieTower.coordinate = haemie
         haemieTower.title = "충청남도 서산시 해미면 해미 IC"
+        haemieTower.subtitle = "해미 IC"
         mapView.addAnnotation(haemieTower)
         
         let seosanRest = CLLocationCoordinate2D(latitude: 36.7387, longitude: 126.5656)
         let seosanRestTower = MKPointAnnotation()
         seosanRestTower.coordinate = seosanRest
         seosanRestTower.title = "충청남도 서산시 서산휴게소"
+        seosanRestTower.subtitle = "서산휴게소"
         mapView.addAnnotation(seosanRestTower)
         
         let sinchang = CLLocationCoordinate2D(latitude: 36.7527, longitude: 126.5691)
         let sinchangTower = MKPointAnnotation()
         sinchangTower.coordinate = sinchang
         sinchangTower.title = "충청남도 서산시 운산면 신창교"
+        sinchangTower.subtitle = "신창교"
         mapView.addAnnotation(sinchangTower)
         
         let unsan = CLLocationCoordinate2D(latitude: 36.7846, longitude: 126.5654)
         let unsanTower = MKPointAnnotation()
         unsanTower.coordinate = unsan
         unsanTower.title = "충청남도 서산시 운산면 운산터널"
+        unsanTower.subtitle = "운산터널"
         mapView.addAnnotation(unsanTower)
     }
 
@@ -274,10 +280,9 @@ extension MapViewController: ViolationDataManagerDelegate {
 
 extension MapViewController: CheckPointDataManagerDelegate {
     func didUpdateCheckPointData(_ CheckPointDataManager: CheckPointDataManager, checkPointData: [CheckPoint]) {
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async {
             self.checkPointData = checkPointData
-            
-            
+            print(self.checkPointData)
         }
     }
 }

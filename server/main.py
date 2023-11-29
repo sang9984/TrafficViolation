@@ -142,7 +142,6 @@ def insert_record(api_key):
         new_car = TrafficViolation(
             car_number=data['car_number'],
             overspeed=data['overspeed'],
-            speed_limit=data['speed_limit'],
             location=data['location'],
             violation_time=data['violation_time'],
             violation_date=data['violation_date'],

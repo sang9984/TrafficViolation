@@ -12,7 +12,9 @@ import AlamofireImage
 
 class DetailView: UIView {
     
-    
+    var dataManager = CheckPointDataManager()
+    var checkPoints: [CheckPoint] = [] // CheckPoint 데이터
+    let locationPicker = UIPickerView()
     var isEditMode = true
     
     //MARK: - 멤버 저장속성 구현
@@ -338,16 +340,38 @@ class DetailView: UIView {
         super.init(frame: frame)
         
         backgroundColor = .white
-        setupStackView() // 이 함수가 stackView를 초기화하고 subview로 추가하도록 확실히 합니다
+        setupStackView()
         setupNotification()
-        setcarNumberTextField()
-        
+        setTextFieldDelegates()
+        setupLocationPicker()
+        dataManager.fetchDroneTowerData()
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setTextFieldDelegates() {
+        carNumberTextField.delegate = self
+        dateTextField.delegate = self
+        timeTextField.delegate = self
+        positionTextField.delegate = self
+        bustSpeedTextField.delegate = self
+        dataManager.delegate = self
+    }
+
+    private func setupLocationPicker() {
+        locationPicker.delegate = self
+        locationPicker.dataSource = self
+        positionTextField.inputView = locationPicker // 위치 텍스트 필드에 UIPickerView 설정
+    }
+    
+    func setCheckPoints(_ checkPoints: [CheckPoint]) {
+            self.checkPoints = checkPoints
+            locationPicker.reloadAllComponents()
+        }
     //MARK: - UI설정
     func setcarNumberTextField(){
         carNumberTextField.delegate = self
@@ -451,6 +475,12 @@ class DetailView: UIView {
 //MARK: - 텍스트필드 델리게이트 구현
 
 extension DetailView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+            if textField == positionTextField {
+                textField.inputView = locationPicker
+            }
+        }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if isEditMode && (textField == carNumberTextField || textField == dateTextField || textField == timeTextField || textField == positionTextField || textField == bustSpeedTextField)   {
             return false
@@ -458,4 +488,34 @@ extension DetailView: UITextFieldDelegate {
         return true
     }
 }
+extension DetailView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
 
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return checkPoints.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return checkPoints[row].location
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selectedLocation = checkPoints[row]
+        positionTextField.text = selectedLocation.location
+        bustSpeedTextField.text = String(selectedLocation.speed_limit)
+    }
+}
+extension DetailView: CheckPointDataManagerDelegate {
+    func didUpdateCheckPointData(_ CheckPointDataManager: CheckPointDataManager, checkPointData: [CheckPoint]) {
+        self.checkPoints = checkPointData
+        print(self.checkPoints)
+    }
+    
+    func didFailWithError(error: Error) {
+        
+    }
+    
+    
+}
