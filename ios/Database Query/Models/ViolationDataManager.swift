@@ -15,7 +15,7 @@ protocol ViolationDataManagerDelegate {
 
 struct ViolationDataManager {
     
-    let baseUrl = "http://172.20.10.2:443/TrafficViolations/get_all_record/"
+    let baseUrl = "http://172.20.10.3:443/TrafficViolations/get_all_record/"
     var apiKey = "y76080482ws984ldj9042gbddsdd472913"
     
     var delegate: ViolationDataManagerDelegate?

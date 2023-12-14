@@ -16,7 +16,7 @@ protocol ViolationDataManagerDelegate {
 
 struct ViolationDataManager {
     
-    let baseUrl = "http://172.20.10.2:443/TrafficViolations/"
+    let baseUrl = "http://172.20.10.3:443/TrafficViolations/"
     
     var apiKey = "y76080482ws984ldj9042gbddsdd472913"
     
@@ -89,7 +89,7 @@ struct ViolationDataManager {
         }
     
     func insertNewCar(car: TrafficViolation, completion: @escaping (Bool) -> Void) {
-        let urlString = "http://172.20.10.2:443/TrafficViolations/insert_record/\(apiKey)" // 실제 서버의 API 주소로 변경
+        let urlString = "http://172.20.10.3:443/TrafficViolations/insert_record/\(apiKey)" // 실제 서버의 API 주소로 변경
         let parameters: [String: Any] = [
             "car_number": car.carNumber,
             "overspeed": car.overSpeed,
@@ -113,7 +113,7 @@ struct ViolationDataManager {
     
     // 이미지를 업데이트 하기위해 사용되는 함수
     func uploadImageAndGetPath(image: UIImage, completion: @escaping (String?) -> Void) {
-        let urlString = "http://172.20.10.2:443/TrafficViolations/upload_image/\(apiKey)" // 실제 서버의 이미지 업로드 API 주소로 변경
+        let urlString = "http://172.20.10.3:443/TrafficViolations/upload_image/\(apiKey)" // 실제 서버의 이미지 업로드 API 주소로 변경
 
         // Alamofire를 사용하여 이미지 업로드
         AF.upload(multipartFormData: { multipartFormData in
@@ -136,7 +136,7 @@ struct ViolationDataManager {
 
     // 정보를 수정하기 위한 쿼리를 진행하는 함수
     func updateCarData(car: TrafficViolation, completion: @escaping (Bool) -> Void) {
-        let urlString = "http://172.20.10.2:443/TrafficViolations/update_record/\(car.carNumber)/\(car.violationDate)/\(car.violationTime)/\(apiKey)" // 실제 서버의 API 주소로 변경
+        let urlString = "http://172.20.10.3:443/TrafficViolations/update_record/\(car.carNumber)/\(car.violationDate)/\(car.violationTime)/\(apiKey)" // 실제 서버의 API 주소로 변경
         
             let parameters: [String: Any] = [
                 "car_number": car.carNumber,

@@ -112,35 +112,35 @@ class MapViewController: UIViewController {
         let hanseo = CLLocationCoordinate2D(latitude: 36.6854, longitude: 126.5793)
         let hanseoTower = MKPointAnnotation()
         hanseoTower.coordinate = hanseo
-        hanseoTower.title = "충청남도 서산시 해미면"
+        hanseoTower.title = "충청남도 서산시 해미면 한서대 입구"
         hanseoTower.subtitle = "한서대 입구"
         mapView.addAnnotation(hanseoTower)
         
         let haemie = CLLocationCoordinate2D(latitude:  36.7132, longitude: 126.5625)
         let haemieTower = MKPointAnnotation()
         haemieTower.coordinate = haemie
-        haemieTower.title = "충청남도 서산시 해미면"
+        haemieTower.title = "충청남도 서산시 해미면 해미 IC"
         haemieTower.subtitle = "해미 IC"
         mapView.addAnnotation(haemieTower)
         
         let seosanRest = CLLocationCoordinate2D(latitude: 36.7387, longitude: 126.5656)
         let seosanRestTower = MKPointAnnotation()
         seosanRestTower.coordinate = seosanRest
-        seosanRestTower.title = "충청남도 서산시"
+        seosanRestTower.title = "충청남도 서산시 서산휴게소"
         seosanRestTower.subtitle = "서산휴게소"
         mapView.addAnnotation(seosanRestTower)
         
         let sinchang = CLLocationCoordinate2D(latitude: 36.7527, longitude: 126.5691)
         let sinchangTower = MKPointAnnotation()
         sinchangTower.coordinate = sinchang
-        sinchangTower.title = "충청남도 서산시 운산면"
+        sinchangTower.title = "충청남도 서산시 운산면 신창교"
         sinchangTower.subtitle = "신창교"
         mapView.addAnnotation(sinchangTower)
         
         let unsan = CLLocationCoordinate2D(latitude: 36.7846, longitude: 126.5654)
         let unsanTower = MKPointAnnotation()
         unsanTower.coordinate = unsan
-        unsanTower.title = "충청남도 서산시 운산면"
+        unsanTower.title = "충청남도 서산시 운산면 운산터널"
         unsanTower.subtitle = "운산터널"
         mapView.addAnnotation(unsanTower)
     }
@@ -209,7 +209,7 @@ extension MapViewController: MKMapViewDelegate {
         }
         } else {
         // 그 외의 핀을 선택한 경우 기존 로직 수행
-        if let annotationSubtitle = view.annotation?.subtitle {
+        if let annotationSubtitle = view.annotation?.title {
             let mapDetailVC = MapDetailViewController()
             mapDetailVC.violationData = self.violationData.filter { $0.location == annotationSubtitle }
             self.navigationController?.pushViewController(mapDetailVC, animated: true)

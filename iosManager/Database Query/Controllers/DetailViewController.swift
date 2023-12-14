@@ -10,7 +10,7 @@ import PhotosUI
 
 protocol DetailViewControllerDelegate: AnyObject {
     func didAddNewCar(car: TrafficViolation)
-    func didUpdateCar(car: TrafficViolation) // 새로 추가된 메소드
+    func didUpdateCar(car: TrafficViolation)
 }
 
 final class DetailViewController: UIViewController {

@@ -14,7 +14,7 @@ protocol CheckPointDataManagerDelegate {
 
 struct CheckPointDataManager{
     
-    let baseUrl = "http://172.20.10.2:443/CheckPoint/"
+    let baseUrl = "http://172.20.10.3:443/CheckPoint/"
     var apiKey = "y76080482ws984ldj9042gbddsdd472913"
     
     var delegate: CheckPointDataManagerDelegate?

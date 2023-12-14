@@ -5,7 +5,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireImage (~> 4.1)
+  - AlamofireImage
 
 SPEC REPOS:
   trunk:
@@ -16,6 +16,6 @@ SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   AlamofireImage: 843953fa97bee5f561cf05d83abd759e590b068d
 
-PODFILE CHECKSUM: 37e505f650857e9a0d004b107e7419ee5e549e5f
+PODFILE CHECKSUM: 47245b202512bb67e9474196d87824a0d86600b3
 
 COCOAPODS: 1.11.3

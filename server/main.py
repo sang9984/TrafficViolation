@@ -1,6 +1,6 @@
 import os
 from urllib.parse import quote_plus
-from flask import Flask, request, jsonify, abort, url_for
+from flask import Flask, request, jsonify, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.exceptions import HTTPException
@@ -226,7 +226,6 @@ def update_record(api_key, car_number, violation_date, violation_time):
         if record:
             # 기본 키가 아닌 다른 필드 업데이트
             record.overspeed = data.get('overspeed', record.overspeed)
-            # record.speed_limit = data.get('speed_limit', record.speed_limit)
             record.location = data.get('location', record.location)
             record.image_path = data.get('image_path', record.image_path)
 

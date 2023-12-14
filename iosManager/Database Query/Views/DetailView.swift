@@ -373,13 +373,6 @@ class DetailView: UIView {
             locationPicker.reloadAllComponents()
         }
     //MARK: - UI설정
-    func setcarNumberTextField(){
-        carNumberTextField.delegate = self
-        dateTextField.delegate = self
-        timeTextField.delegate = self
-        positionTextField.delegate = self
-        bustSpeedTextField.delegate = self
-    }
     
     // stackView를 tableViewCell에 추가하는 메서드
     func setupStackView() {
@@ -482,7 +475,7 @@ extension DetailView: UITextFieldDelegate {
         }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if isEditMode && (textField == carNumberTextField || textField == dateTextField || textField == timeTextField || textField == positionTextField || textField == bustSpeedTextField)   {
+        if textField == bustSpeedTextField || (isEditMode && (textField == carNumberTextField || textField == dateTextField || textField == timeTextField || textField == positionTextField || textField == bustSpeedTextField))   {
             return false
         }
         return true
